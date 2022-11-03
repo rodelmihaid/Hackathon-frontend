@@ -1,0 +1,13 @@
+<div class="add-teacher-button">
+  <button mat-raised-button (click)="onAddTeacher()"  color="primary">Add Teacher</button>
+</div>
+
+
+<div *ngIf="teacherList.length == 0">No teachers available</div>
+
+<div *ngIf="teacherList.length > 0">
+  <mat-list >
+    <app-teacher-item *ngFor="let teacherElem of teacherList" [teacher]="teacherElem"  (refreshTeacherEvent)="refreshTeacherList()"></app-teacher-item>
+  </mat-list>
+</div>
+

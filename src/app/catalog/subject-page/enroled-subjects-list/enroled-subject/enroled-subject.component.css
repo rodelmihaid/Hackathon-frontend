@@ -1,0 +1,12 @@
+.enroled-subject{
+ /* width: 300px;
+  height:300px;*/
+  /*
+  border: 1px solid black;
+  */
+}
+.subject-name{
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}

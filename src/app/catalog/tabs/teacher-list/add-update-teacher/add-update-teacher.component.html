@@ -1,0 +1,63 @@
+<form #teacherForm="ngForm" (ngSubmit)="onTeacherSubmit(teacherForm)">
+  <mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Add Teacher
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+
+      <div>
+        <span fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field appearance="fill" class="form-field-teacher">
+            <mat-label>First name:</mat-label>
+            <input matInput #firstName="ngModel" [ngModel]="teacher.firstName" name="firstName" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field-teacher">
+            <mat-label>Last name:</mat-label>
+            <input matInput #lastName="ngModel" [ngModel]="teacher.lastName" name="lastName" required>
+          </mat-form-field>
+        </span>
+        <span fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field appearance="fill" class="form-field-teacher">
+            <mat-label>Cnp:</mat-label>
+            <input matInput #cnp="ngModel" [ngModel]="teacher.cnp" name="cnp" required>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-field-teacher">
+            <mat-label>Salary:</mat-label>
+            <input matInput #salary="ngModel" [ngModel]="teacher.salary" name="salary" required>
+          </mat-form-field>
+        </span>
+        <span fxLayout="row" fxLayoutAlign="start center" >
+          <mat-form-field appearance="fill">
+            <mat-label>Day Of birth:</mat-label>
+            <input matInput #dateOfBirth="ngModel" [ngModel]="teacher.dateOfBirth" name="dateOfBirth" [matDatepicker]="picker" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </span>
+        <mat-form-field appearance="fill" class="hide-elem">
+          <mat-label>Id:</mat-label>
+          <input matInput #id="ngModel" [ngModel]="teacher.id" name="id">
+        </mat-form-field>
+      </div>
+    <div>
+      <app-teacher-subject-list (removeSubject)="removeSubject($event)" [subjectList]="teacher.subjects"></app-teacher-subject-list>
+      <div *ngIf="isEditMode==false">
+        Not Implemented. Cannot add subjects on a Teacher!
+      </div>
+    </div>
+    </mat-card-content>
+
+    <mat-card-footer>
+      <button type="submit" *ngIf="isEditMode==false" mat-raised-button color="primary">Save</button>
+      <button type="submit" *ngIf="isEditMode==true" mat-raised-button color="primary">Update teacher</button>
+      <button type="button" mat-raised-button color="primary" (click)="onClose()">Close</button>
+    </mat-card-footer>
+  </mat-card>
+
+
+</form>

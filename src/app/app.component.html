@@ -1,0 +1,28 @@
+<!--
+<app-subject-page></app-subject-page>
+-->
+
+<div class="context">
+
+
+
+  <div class="area" >
+
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+
+  </div >
+</div>
+<app-menu [loggedInUser]="loggedInUser"></app-menu>
+<router-outlet (activate)="sendLoggedInUserEmail()"></router-outlet>
+<notifier-container></notifier-container>

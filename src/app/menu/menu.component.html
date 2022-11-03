@@ -1,0 +1,32 @@
+<mat-toolbar class="mat-toolbar--primary" >
+  <span class="title" (click)="home()">
+    Virtual Catalog</span>
+
+
+  <button mat-button routerLink="student-catalog" style="margin:10px"  *ngIf="authenticationService.isUserLoggedIn()&&!authenticationService.userIsProfessor()">Materii</button>
+  <button mat-button *ngIf="authenticationService.isUserLoggedIn()" style="margin:10px 10px 10px 0px">Examene</button>
+  <button mat-button routerLink="teacher" *ngIf="authenticationService.isUserLoggedIn() && authenticationService.userIsProfessor()" style="margin:10px 10px 10px 0px">Profesor</button>
+  <button mat-button routerLink="admin" *ngIf="authenticationService.isUserLoggedIn() && authenticationService.userIsAdmin()" style="margin:10px 10px 10px 0px">Admin</button>
+
+  <button mat-button [matMenuTriggerFor]="userName" *ngIf="authenticationService.isUserLoggedIn()"
+          class="userName-button">
+    {{loggedInUser}}<span class="glyphicon glyphicon-menu-down" style="margin-left: 10px"></span></button>
+  <mat-menu #userName="matMenu" yPosition="below">
+
+<!--    <button mat-menu-item class="logged-in-buttons" *ngIf="authenticationService.isUserLoggedIn()"-->
+<!--            (click)="userSettings()">-->
+<!--      <span class="glyphicon glyphicon-user" style="margin-right: 10px"></span>Account-->
+<!--    </button>-->
+    <!--    <button *ngIf="authenticationService.isUserLoggedIn()" mat-button>Settings</button>-->
+    <button mat-menu-item class="logged-in-buttons" *ngIf="authenticationService.isUserLoggedIn()" (click)="logout()">
+      <span class="glyphicon glyphicon-log-out" style="margin-right: 14px"></span>Logout
+    </button>
+  </mat-menu>
+  <div class="buttons">
+    <button *ngIf="!authenticationService.isUserLoggedIn()" mat-button class="button--primary" (click)="login()">Login
+    </button>
+    <button *ngIf="!authenticationService.isUserLoggedIn()" mat-button class="button--primary" (click)="register()">
+      Register
+    </button>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,25 @@
+<mat-accordion style="display: flex; flex: 1 1 35%;margin: 7px;">
+  <mat-expansion-panel style=" align-self: stretch!important;">
+    <mat-expansion-panel-header fxLayout="column" fxLayoutAlign="center center"
+                                style="height:300px;width: 600px;max-width:600px!important;align-self: stretch!important; ">
+      <!-- <mat-card class="enroled-subject">
+         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+           {{enroledSubject.name}}
+         </mat-card-content>
+       </mat-card>-->
+
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <div class="subject-name" fxLayout="column" fxLayoutAlign="center center">
+          {{enroledSubject.name}}
+        </div>
+        <div class="teacher-name">
+          Popa Ionut
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <div fxLayout="column" fxLayoutAlign="start start">
+      <app-project-list [subjectId]="enroledSubject.id"> </app-project-list>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+

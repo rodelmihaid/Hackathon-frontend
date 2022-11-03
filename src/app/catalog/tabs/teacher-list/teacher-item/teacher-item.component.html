@@ -1,0 +1,9 @@
+<mat-list-item>
+  <span class="teacher-field action-icon" (click)="onEditTeacher()" matTooltip="Edit teacher"><mat-icon>edit</mat-icon></span>
+  <span class="teacher-field action-icon"><mat-icon (click)="onDeleteTeacher()" matTooltip="Delete teacher">delete_outline</mat-icon></span>
+  <span class="teacher-field">{{teacher.firstName}}</span>
+  <span class="teacher-field">{{teacher.lastName}}</span>
+  <span class="teacher-field">{{teacher.cnp}}</span>
+  <span class="teacher-field">{{teacher.salary}}</span>
+  <span class="teacher-field">{{teacher.dateOfBirth}}</span>
+</mat-list-item>

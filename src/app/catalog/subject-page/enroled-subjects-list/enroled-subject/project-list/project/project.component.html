@@ -1,0 +1,134 @@
+<mat-card style="margin: 5px;max-width: 500px">
+  <mat-card-header>
+    <mat-card-title>
+      {{project.title}}
+    </mat-card-title>
+    <mat-card-subtitle>Deadline:10.10.2023</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    {{project.description}}
+    <div *ngIf="project.attachment!=undefined && project.attachment!=''" style="margin-top: 20px;margin-bottom: 5px;">
+      <mat-icon>attach_file</mat-icon>
+      {{project.attachment}}
+    </div>
+    <div>
+      <button mat-raised-button color="primary" *ngIf="showAddSolutionButton()
+      &&!this.authenticationService.userIsAdmin()&&!authenticationService.userIsProfessor()"
+              (click)="addStudentProjectImplementation()" style="margin-top: 20px">Adauga
+      </button>
+    </div>
+    <div *ngIf="this.studentProjectImplementations!=undefined && this.studentProjectImplementations!=null">
+      <div style="margin-left: 30px;margin-top: 15px">
+
+        <mat-card>
+
+          <mat-card-header>
+            <mat-card-title
+              *ngIf="!this.authenticationService.userIsAdmin()&&!this.authenticationService.userIsProfessor()">
+              Tema uploadata de tine
+            </mat-card-title>
+
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              {{this.studentProjectImplementations.solution}}
+            </div>
+            <div>
+              {{this.studentProjectImplementations.grade}}
+            </div>
+            <div
+              *ngIf="this.studentProjectImplementations.attachment!=null||this.studentProjectImplementations.attachment!=undefined">
+              <mat-icon>attach_file</mat-icon>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="this.studentProjectImplementationsForTeacher!=undefined && this.studentProjectImplementationsForTeacher!=null
+    && this.studentProjectImplementationsForTeacher!=[]">
+      <div style="margin-left: 30px;margin-top: 15px" *ngFor="let solution of studentProjectImplementationsForTeacher">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              Tema uploadata de {{solution.userEmail}}
+            </mat-card-title>
+
+
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              {{this.solution.solution}}
+            </div>
+            <div
+              *ngIf="this.solution.attachment!=null||this.solution.attachment!=undefined">
+              <mat-icon>attach_file</mat-icon>
+            </div>
+
+            <form #notaForm="ngForm" (ngSubmit)="saveNotaForm(notaForm)">
+              <div>
+                <input [(ngModel)]="solution.projectId" type="hidden" name="projectId">
+                <input [(ngModel)]="solution.userEmail" type="hidden" name="userEmail">
+                <mat-form-field>
+                  <mat-label>
+                    Nota:
+                  </mat-label>
+                  <input matInput #nota="ngModel" [ngModel]="solution.grade" name="nota" ng-readonly="solution.grade!=''&&
+                       solution.grade!=null&&solution.grade!=undefined" required>
+                </mat-form-field>
+              </div>
+              <div>
+                <button mat-raised-button type="submit" color="primary" *ngIf="solution.grade==''||
+                       solution.grade==null||solution.grade==undefined">Salveaza Nota
+                </button>
+              </div>
+            </form>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div *ngIf="this.newStudentProjectImplementations!=undefined && this.newStudentProjectImplementations!=null">
+      <div style="margin-left: 30px;margin-top: 15px">
+        <form #implementationForm="ngForm" (ngSubmit)="saveProjectImplementation(implementationForm)" >
+        <mat-card>
+          <mat-card-title>
+            Add Implementation
+
+          </mat-card-title>
+          <mat-card-content>
+            <mat-form-field>
+              <mat-label>
+                Introduceti Rezolvarea:
+              </mat-label>
+            <textarea matInput ngModel name="solution" cols="50" rows="10" required> </textarea>
+            </mat-form-field>
+
+            <input type="file" class="file-input"
+                   (change)="onFileSelected($event)" #fileUpload multiple>
+            <div class="file-upload">
+              <div *ngFor="let fName of fileNames| keyvalue" fxLayout="row" fxLayoutAlign="start center" style="cursor: pointer;">
+                <mat-icon *ngIf="fName"  (click)="deleteFileFromMap(fName.key)">delete</mat-icon>
+                {{fName.key}}
+
+              </div>
+
+              <span mat-mini-fab style=" border-radius: 50%;padding: 10px"
+                    (click)="fileUpload.click()">
+          <mat-icon class="mat-icon-class">attach_file</mat-icon>
+        </span>
+            </div>
+
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">Salveaza rezolvarea</button>
+            <!--          adauga nota-->
+          </mat-card-actions>
+        </mat-card>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+
+</mat-card>
+
+

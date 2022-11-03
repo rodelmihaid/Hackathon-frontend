@@ -1,0 +1,13 @@
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Assigned Subjects</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list>
+        <app-teacher-subject (removeSubject)="removeSubjectFromList($event)" *ngFor="let subjectItem of subjectList" [subject]="subjectItem"></app-teacher-subject>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
